@@ -13,7 +13,7 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 
 
 ### Dataset
-- **Source**: [Aerial_Landscapes on Kaggle](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)  
+- **Source**: [Aerial_Landscapes on Kaggle](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)  (has expired)
 - **Details**: 12,000 images, 15 balanced categories, each 256×256 pixels  
 - **Loading**:  
   - Traditional ML: converted to NumPy arrays  
@@ -46,7 +46,7 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 ```
 
 
----
+
 
 ### Traditional ML Methods
 **Feature Extraction**:  
@@ -70,7 +70,6 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 - Weighted models improved accuracy by 2–4%  
 - XGBoost achieved 47.69% accuracy on an imbalanced dataset  
 
----
 
 ### Deep Learning Methods
 **Models**:  
@@ -93,7 +92,7 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 - Data augmentation and transfer learning contributed to high performance  
 - Confusion matrices show near-perfect classification for major classes  
 
----
+
 
 ### Key Insights
 - **Deep learning > traditional ML** in accuracy and robustness  
@@ -102,7 +101,7 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 - Strategic **feature selection** and **model choice** balance efficiency and accuracy  
 - Data augmentation and transfer learning accelerate convergence and improve generalisation  
 
----
+
 
 ### How to Run
 1. Install required libraries:  
