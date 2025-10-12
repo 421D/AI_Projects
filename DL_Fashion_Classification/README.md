@@ -1,5 +1,7 @@
 # Fashion Classifier
-
+---
+For further details, please refer to the notebook.
+---
 ### Project Overview
 This project aims to classify fashion items into **four main categories**:  
 - Accessories  
