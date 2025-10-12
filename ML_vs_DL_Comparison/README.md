@@ -1,177 +1,124 @@
-# 9517
-# Aerial Landscape Image Classification using machine learning techniques and Convolutional Neural Networks
+# Aerial Landscape Image Classification
 
-### 📌 Overview
-This project aims to classify aerial images into 15 landscape categories (e.g., Airport, Beach, City, Forest, etc.). Machine learning covers data loading and preprocessing, feature extraction using **LBP** and **SIFT**, and model training and evaluation with various classifiers. using convolutional neural networks using **EfficientNet-B0** and **ResNet18**. We applied **5-fold cross-validation**, **data augmentation**, and evaluated performance using metrics such as **accuracy, precision, recall, F1-score**, and **confusion matrix** visualizations.
+### Project Overview
+This project focuses on classifying aerial images into **15 landscape categories** (e.g., Airport, Beach, City, Forest). We compare **traditional machine learning methods** (LBP, SIFT + KNN/SVM/Random Forest/XGBoost) with **deep learning models** (ResNet-18 and EfficientNet-B0).  
 
----
+Key techniques include:  
+- **5-fold cross-validation** for robust evaluation  
+- **Data augmentation** (flipping, rotation, colour jitter, resized cropping)  
+- **Performance metrics**: accuracy, precision, recall, F1-score, confusion matrix  
 
-### 📁 Dataset
-- Source: [Aerial_Landscapes](./dataset_split/train), which can be found on Kaggle:
-* [Aerial_Landscapes](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)
+Deep learning models leverage **transfer learning** from ImageNet-pretrained weights for faster convergence and better generalization.  
 
-- 15 classes, with training and validation folders pre-split.
 
-- Deep learing dataset is loaded using `torchvision.datasets.ImageFolder`.
 
----
+### Dataset
+- **Source**: [Aerial_Landscapes on Kaggle](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)  
+- **Details**: 12,000 images, 15 balanced categories, each 256×256 pixels  
+- **Loading**:  
+  - Traditional ML: converted to NumPy arrays  
+  - CNNs: `torchvision.datasets.ImageFolder`  
+
+
+
 ### Libraries
-
-The following Python libraries are used in this notebook:
-
-* pandas
-* numpy
-* matplotlib
-* seaborn
-* tensorflow
-* keras
-* scikit-image (skimage)
-* scikit-learn (sklearn)
-* opencv-python (cv2)
-* tqdm
-* glob
-* torchvision
-* sklearn.metrics
-* matplotlib.pyplot
-* sklearn.model_selection
+- Python 3.10
+- pandas, numpy, matplotlib, seaborn, tqdm, glob  
+- OpenCV (`cv2`), scikit-image (`skimage`)  
+- scikit-learn (`sklearn`)  
+- PyTorch (`torch`, `torchvision`)  
+- TensorFlow/Keras (for ML dataset preparation)
 
 
-### CNNs
-## 📁 Dataset Preparation
 
-To create a reduced training dataset (60% of the original images), we provide a script:
-```bash
-python split_dataset.py
+### Project Structure
 ```
-
-## ⚙️ Dependencies
-Install using:
-
-```bash
-#conda create -n torch310 python=3.10 -y
-#conda activate torch310
-torchvision, PIL, scikit-learn
-```
-## Training Scripts:
-
-# 1.Download and Extract: Get archive.zip, extract datasets.
-
-# 2.Process Data: To create a reduced training dataset (60% of the original images)
-python split_dataset.py
-
-# 3. Train Models:
-/opt/anaconda3/envs/torch310/bin/python train_ResNet18.py
-
-/opt/anaconda3/envs/torch310/bin/python train_EfficientNet-B0.py
-
-# 4.Test Models:
-/opt/anaconda3/envs/torch310/bin/python test_ResNet18.py
-
-/opt/anaconda3/envs/torch310/bin/python test_EfficientNet-B0.py
-
-# 5.Evaluation metrics and plots are saved as:
-
-efficientnet_classification_report.txt
-
-efficientnet_confusion_matrix.png
-
-fold_accuracy_plot.png
-
-test_fold_accuracy_plot.png
-
-fold{n}_report.txt, model_fold{n}.pth for each fold
-
-## Example Results:
-
-# ResNet18 5-Fold Validation Accuracy:
-Fold 1: 0.9736
-Fold 2: 0.9646
-Fold 3: 0.9674
-Fold 4: 0.9688
-Fold 5: 0.9722
-Average accuracy: 0.9693
-
-# EfficientNet-B0 5-Fold Validation Accuracy:
-Fold 1: 0.9743
-Fold 2: 0.9771
-Fold 3: 0.9792
-Fold 4: 0.9833
-Fold 5: 0.9854
-Average accuracy: 0.9799
-
-# ResNet18 Confusion Matrix (correct predictions per class):
-Agriculture: 471, Airport: 456, Beach: 469, City: 465, Desert: 464, Forest: 473, Grassland: 475, Highway: 456, Lake: 464, Mountain: 456, Parking: 474, Port: 470, Railway: 458, Residential: 471, River: 457.
-
-# EfficientNet-B0 Confusion Matrix (correct predictions per class):
-Agriculture: 473, Airport: 472, Beach: 479, City: 475, Desert: 464, Forest: 475, Grassland: 469, Highway: 469, Lake: 467, Mountain: 460, Parking: 471, Port: 474, Railway: 472, Residential: 473, River: 462.
-
-
-## Folder Structure:
-.
 ├── dataset_split/
-│   ├── train/
+│ └── train/ # Pre-split training dataset
 ├── train_ResNet18.py
 ├── train_EfficientNet-B0.py
 ├── test_ResNet18.py
 ├── test_EfficientNet-B0.py
-├── split_dataset.py
-├── model_fold{n}.pth
-├── fold{n}_report.txt
+├── split_dataset.py # Script to create reduced training dataset
+├── model_fold{n}.pth # Saved models per fold
+├── fold{n}_report.txt # Classification report per fold
 └── README.md
-
-## 📚 Code References
-
-This project leverages the following open-source resources:
-
-- [PyTorch Official Tutorials](https://pytorch.org/tutorials/)
-- `torchvision` pretrained models and datasets: https://pytorch.org/vision/stable/models.html (models.efficientnet_b0, models.resnet18）)
-- Scikit-learn's classification metrics and cross-validation: https://scikit-learn.org/stable/modules/classes.html#module-sklearn.model_selection
+```
 
 
-### Machine Learning
-## Data Processing
+---
 
-The image data is loaded using `keras.utils.image_dataset_from_directory` to create training and validation datasets. The images are resized to 256x256 pixels.
+### Traditional ML Methods
+**Feature Extraction**:  
+- **LBP (Local Binary Patterns)** → 10-bin histogram per image  
+- **SIFT (Scale-Invariant Feature Transform)** → 50 keypoints × 128-dim → 6400-dim vector  
 
-The `extract_images_labels` function is used to extract the images and labels from the TensorFlow datasets into NumPy arrays.
+**Classifiers**:  
+- K-Nearest Neighbours (basic & weighted)  
+- Random Forest (basic & weighted)  
+- SVM (basic & weighted)  
+- XGBoost (for imbalanced experiments)  
 
-## Feature Extraction
+**Evaluation Metrics**:  
+- Training/prediction time  
+- Accuracy  
+- Precision, Recall, F1-score  
+- Confusion matrix  
 
-Two feature extraction methods are employed:
+**Key Observations**:  
+- LBP + Random Forest performed best among traditional approaches  
+- Weighted models improved accuracy by 2–4%  
+- XGBoost achieved 47.69% accuracy on an imbalanced dataset  
 
-* **LBP (Local Binary Pattern):** The `extract_lbp_features` function calculates LBP features for the images.
-* **SIFT (Scale-Invariant Feature Transform):** The `extract_sift_features` function calculates SIFT features.
+---
 
-## Model description
+### Deep Learning Methods
+**Models**:  
+- **ResNet-18** (11.7M parameters)  
+- **EfficientNet-B0** (5.3M parameters, more efficient)  
 
-The following machine learning models are used for classification:
+**Training Setup**:  
+- Input size: 224×224  
+- 5-fold cross-validation  
+- Adam optimiser, learning rate 1e-4, batch size 32, 10 epochs  
+- Data augmentation: horizontal flip, ±15° rotation, colour jitter, random resized crop  
 
-* **KNN (K-Nearest Neighbors):** Basic and weighted versions.
-* **Random Forest:** Basic and weighted versions.
-* **SVM (Support Vector Machine):** Basic and weighted versions using SGDClassifier.
+**Performance**:  
+| Model          | Average Accuracy | Precision | Recall | F1-score |
+|----------------|----------------|-----------|--------|----------|
+| ResNet-18      | 96.93%         | 96.95%    | 96.94% | 96.92%   |
+| EfficientNet-B0| 97.99%         | 98.01%    | 97.99% | 97.98%   |
 
-Weighted models are implemented to address potential class imbalance in the dataset. Class weights are calculated using `sklearn.utils.class_weight.compute_class_weight`.
+- EfficientNet-B0 outperformed ResNet-18 across all folds and metrics  
+- Data augmentation and transfer learning contributed to high performance  
+- Confusion matrices show near-perfect classification for major classes  
 
-## Model Evaluation
+---
 
-The `evaluate_model` function is used to train and evaluate each model. It reports:
+### Key Insights
+- **Deep learning > traditional ML** in accuracy and robustness  
+- **EfficientNet-B0** is optimal for resource-constrained environments  
+- Weighted models improve performance on imbalanced datasets  
+- Strategic **feature selection** and **model choice** balance efficiency and accuracy  
+- Data augmentation and transfer learning accelerate convergence and improve generalisation  
 
-* Training time
-* Prediction time
-* Overall accuracy
-* Classification report (precision, recall, F1-score) for each class
-* Confusion matrix visualization
+---
 
-## how to run
+### How to Run
+1. Install required libraries:  
+```
+conda create -n torch310 python=3.10 -y
+conda activate torch310
+pip install torch torchvision scikit-learn scikit-image opencv-python pandas numpy matplotlib seaborn tqdm
+```
 
-1.  Ensure you have the required libraries installed.
-2.  Download the Aerial Landscapes dataset from the provided Kaggle link and place it in the appropriate directory.
-3.  Run the notebook cells sequentially to execute the data loading, feature extraction, model training, and evaluation steps.
+2. Download the dataset from Kaggle and place it in dataset_split/train/
+3. Split dataset (optional reduced version): python split_dataset.py
+4. Train models:  python train_ResNet18.py    python train_EfficientNet-B0.py
+5. Test models:python test_ResNet18.py
+python test_EfficientNet-B0.py
 
-## Results
-
-The notebook provides a comprehensive evaluation of different feature extraction and classification model combinations for the landscape classification task. The results, including accuracy and confusion matrices, are presented to compare the performance of each approach.
-
-
-
-
+6. Check results:
+  Fold reports: fold{n}_report.txt
+  Saved models: model_fold{n}.pth
+  Confusion matrices & metrics saved as PNG/TXT files
