@@ -1,33 +1,32 @@
 # Aerial Landscape Image Classification
 
 ### Project Overview
-This project focuses on classifying aerial images into **15 landscape categories** (e.g., Airport, Beach, City, Forest). We compare **traditional machine learning methods** (LBP, SIFT + KNN/SVM/Random Forest/XGBoost) with **deep learning models** (ResNet-18 and EfficientNet-B0).  
+This project aims to classify aerial landscape images into **15 categories** (e.g., Airport, Beach, City, Forest) and systematically compare the performance of **traditional machine learning methods** (LBP, SIFT + KNN/SVM/Random Forest/XGBoost) with **deep learning models** (ResNet-18 and EfficientNet-B0).
+It evaluates feature-based and end-to-end approaches under a unified experimental setup.
 
 Key techniques include:  
-- **5-fold cross-validation** for robust evaluation  
-- **Data augmentation** (flipping, rotation, colour jitter, resized cropping)  
-- **Performance metrics**: accuracy, precision, recall, F1-score, confusion matrix  
+- **5-fold cross-validation** for stable and unbiased evaluation
+- **Data augmentation** with flipping, rotation, colour jitter, and resized cropping
+- **Evaluation metrics**: accuracy, precision, recall, F1-score, and confusion matrix
 
-Deep learning models leverage **transfer learning** from ImageNet-pretrained weights for faster convergence and better generalization.  
+Deep learning models leverage **transfer learning** from ImageNet-pretrained weights for faster convergence and better generalisation.  
 
 
 
 ### Dataset
-- **Source**: [Aerial_Landscapes on Kaggle](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)  (has expired)
-- **Details**: 12,000 images, 15 balanced categories, each 256×256 pixels  
-- **Loading**:  
-  - Traditional ML: converted to NumPy arrays  
-  - CNNs: `torchvision.datasets.ImageFolder`  
+- **Source**: [Aerial_Landscapes on Kaggle](https://www.kaggle.com/datasets/balraj98/aerial-landscapes)  (dataset no longer available)
+- **Composition**: 12,000 balanced images across 15 categories, each sized 256×256 pixels
+- **Data loading**:  
+  - ML methods: converted to NumPy arrays
+  - CNN models: loaded using `torchvision.datasets.ImageFolder`  
 
 
 
 ### Libraries
 - Python 3.10
 - pandas, numpy, matplotlib, seaborn, tqdm, glob  
-- OpenCV (`cv2`), scikit-image (`skimage`)  
-- scikit-learn (`sklearn`)  
-- PyTorch (`torch`, `torchvision`)  
-- TensorFlow/Keras (for ML dataset preparation)
+- OpenCV (`cv2`), scikit-image (`skimage`), scikit-learn (`sklearn`)  
+- PyTorch (`torch`, `torchvision`); TensorFlow/Keras (for ML dataset preparation)
 
 
 
@@ -50,8 +49,8 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 
 ### Traditional ML Methods
 **Feature Extraction**:  
-- **LBP (Local Binary Patterns)** → 10-bin histogram per image  
-- **SIFT (Scale-Invariant Feature Transform)** → 50 keypoints × 128-dim → 6400-dim vector  
+- **LBP (Local Binary Patterns)**: generates a 10-bin histogram per image
+- **SIFT (Scale-Invariant Feature Transform)**: extracts 50 keypoints × 128-dim vectors forming a 6,400-dim representation
 
 **Classifiers**:  
 - K-Nearest Neighbours (basic & weighted)  
@@ -66,9 +65,9 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 - Confusion matrix  
 
 **Key Observations**:  
-- LBP + Random Forest performed best among traditional approaches  
-- Weighted models improved accuracy by 2–4%  
-- XGBoost achieved 47.69% accuracy on an imbalanced dataset  
+- LBP + Random Forest achieved the best performance among ML methods.
+- Weighted models improved accuracy by approximately 2–4%.
+- XGBoost reached 47.69% accuracy on an imbalanced dataset.
 
 
 ### Deep Learning Methods
@@ -77,10 +76,8 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 - **EfficientNet-B0** (5.3M parameters, more efficient)  
 
 **Training Setup**:  
-- Input size: 224×224  
-- 5-fold cross-validation  
-- Adam optimiser, learning rate 1e-4, batch size 32, 10 epochs  
-- Data augmentation: horizontal flip, ±15° rotation, colour jitter, random resized crop  
+Input size 224×224, 5-fold cross-validation, Adam optimizer (lr = 1e-4), batch size 32, 10 epochs,
+with data augmentation (horizontal flip, ±15° rotation, colour jitter, random resized crop).
 
 **Performance**:  
 | Model          | Average Accuracy | Precision | Recall | F1-score |
@@ -88,9 +85,8 @@ Deep learning models leverage **transfer learning** from ImageNet-pretrained wei
 | ResNet-18      | 96.93%         | 96.95%    | 96.94% | 96.92%   |
 | EfficientNet-B0| 97.99%         | 98.01%    | 97.99% | 97.98%   |
 
-- EfficientNet-B0 outperformed ResNet-18 across all folds and metrics  
-- Data augmentation and transfer learning contributed to high performance  
-- Confusion matrices show near-perfect classification for major classes  
+- EfficientNet-B0 consistently outperformed ResNet-18 across all folds.
+- Augmentation and transfer learning significantly improved generalisation, and confusion matrices indicated near-perfect separation across major categories.
 
 
 
