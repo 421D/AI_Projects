@@ -15,16 +15,20 @@ Classify aerial images into **15 landscape categories** (e.g., Airport, Forest, 
   - Dataset: 12,000 balanced images (15 categories, 256×256 px)
   - Methods: 5-fold cross-validation, data augmentation, transfer learning (ImageNet pretrained)
 - Findings: Deep models achieve higher accuracy and robustness; EfficientNet-B0 offers the best trade-off between accuracy and efficiency.
-- **For implementation details and performance reports, see:** See [`ML_vs_DL_Comparison/README.md`](ML_vs_DL_Comparison/README.md)
+- **For implementation details and performance reports, see:**  [`ML_vs_DL_Comparison/README.md`](ML_vs_DL_Comparison/README.md)
 
 
-### 2. Fashion Classification (Deep Learning)
+### 2. Fashion Classification (Deep Learning) | 基于深度学习的时尚分类
 - **Folder:** `DL_Fashion_Classification`
 - **Description:**  
-  Classifies fashion items into **four categories**: Accessories, Bags, Clothing, Shoes using **pretrained CNNs** (MobileNetV2, ResNet18, ResNet50, EfficientNet-B0) on an **augmented dataset of 8,000 images**.  
+  This project performs multi-class classification of fashion images into **four categories** — Accessories, Bags, Clothing, and Shoes — using **pretrained convolutional neural networks**.
+    
 - **Key Highlights:**  
-  - Balanced dataset with data augmentation  
-  - 5-fold cross-validation for model evaluation  
-  - Insights: Lightweight models like MobileNetV2 and EfficientNet-B0 are ideal for efficiency; EfficientNet-B0 handles noise best  
-- **More Details:** See [`DL_Fashion_Classification/README.md`](DL_Fashion_Classification/README.md)
+  - Models: MobileNetV2, ResNet18, ResNet50, EfficientNet-B0
+  - Dataset: 8,000 augmented images (2,000 per class)
+  - Techniques: Balanced augmentation, 5-fold cross-validation, Adam optimiser with early stopping
+  - Evaluation: Accuracy, F1 score, mean average precision (mAP)
+
+- Findings: Lightweight CNNs (MobileNetV2, EfficientNet-B0) achieve comparable accuracy with lower computation; EfficientNet-B0 shows highest robustness under Gaussian noise.
+- **Detailed methodology and experiment results are provided in** [`DL_Fashion_Classification/README.md`](DL_Fashion_Classification/README.md)
 
