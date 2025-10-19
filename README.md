@@ -1,20 +1,21 @@
 # AI_Projects
 
-
-This repository contains AI-related projects from coursework, including **Machine Learning vs Deep Learning comparison** and **Deep Learning Fashion Classification**. Each project has its own folder with a detailed README, code, and report.
-This repository contains my coursework and personal projects in machine learning and deep learning. The main focus is on image classification, model comparison, and deep learning experimentation.
+This repository showcases selected coursework and personal projects in **machine learning (ML)** and **deep learning (DL)**, with a primary focus on **image classification, model performance comparison**, and **efficient deep learning deployment**.
+The overall emphasis is on image classification, model evaluation, and transfer learning experiments.
 
 ## Projects Overview
 
-### 1. ML vs DL Comparison
+### 1. ML vs DL: Aerial Image Classification | 传统 ML 与 DL 对比：遥感图像分类
 - **Folder:** `ML_vs_DL_Comparison`
-- **Description:**  
-  This project focuses on classifying aerial landscape images into **15 categories** (Airport, Beach, City, Forest, etc.) and compares **traditional machine learning methods** (LBP, SIFT + KNN/SVM/Random Forest/XGBoost) with **deep learning models** (ResNet-18 and EfficientNet-B0).  
+- **Goal:**  
+Classify aerial images into **15 landscape categories** (e.g., Airport, Forest, City) using both **traditional ML techniques** (e.g., LBP, SIFT with KNN/SVM/Random Forest/XGBoost) and **modern deep learning architectures** (ResNet-18, EfficientNet-B0).
 - **Key Highlights:**  
-  - Dataset: 12,000 images, 15 balanced categories  
-  - Techniques: 5-fold cross-validation, data augmentation, transfer learning  
-  - Insights: Deep learning outperforms traditional ML; EfficientNet-B0 is optimal for resource-constrained environments  
-- **More Details:** See [`ML_vs_DL_Comparison/README.md`](ML_vs_DL_Comparison/README.md)
+  - Dataset: Algorithms: LBP, SIFT + KNN / SVM / Random Forest / XGBoost
+  - Deep Learning Models: ResNet-18, EfficientNet-B0
+  - Dataset: 12,000 balanced images (15 categories, 256×256 px)
+  - Methods: 5-fold cross-validation, data augmentation, transfer learning (ImageNet pretrained)
+- Findings: Deep models achieve higher accuracy and robustness; EfficientNet-B0 offers the best trade-off between accuracy and efficiency.
+- **For implementation details and performance reports, see:** See [`ML_vs_DL_Comparison/README.md`](ML_vs_DL_Comparison/README.md)
 
 
 ### 2. Fashion Classification (Deep Learning)
